@@ -1,0 +1,27 @@
+<!-- Components info: https://webdev.dartlang.org/components -->
+<div>
+  <material-input label="Search for an artist"
+                  autoFocus floatingLabel style="width:80%"
+                  [(ngModel)]="artistName"
+                  (keyup.enter)="search()">
+  </material-input>
+
+  <material-fab mini raised
+                (trigger)="search()"
+                [disabled]="artistName.isEmpty">
+    <glyph icon="search"></glyph>
+  </material-fab>
+</div>
+
+<div *ngIf="items.isNotEmpty">
+  <ul>
+      <li *ngFor="let item of items; let i=index">
+        <material-checkbox #done materialTooltip="Mark item as done">
+        </material-checkbox>
+        <span [class.done]="done.checked">{{item}}</span>
+        <material-fab mini (trigger)="remove(i)">
+          <glyph icon="delete"></glyph>
+        </material-fab>
+      </li>
+  </ul>
+</div>
